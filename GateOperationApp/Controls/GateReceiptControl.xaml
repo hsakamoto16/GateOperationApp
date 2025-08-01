@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="GateOperationApp.Controls.GateReceiptControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GateOperationApp.Controls"
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- 入力＋ボタン -->
+                <RowDefinition Height="Auto"/>
+                <!-- 表示用 TextBlock -->
+                <RowDefinition Height="*"/>
+                <!-- 必要に応じて下部余白など -->
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="領収書データを削除します。受付・会計に同じ領収書番号のデータがある場合は同様に削除されます。" FontSize="16" Margin="0,0,0,10"/>
+                <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,10">
+                    <Label Content="領収書番号:" VerticalAlignment="Center" FontSize="24"/>
+                    <TextBox Width="300" FontSize="24"
+                     Text="{Binding ReceiptNo.Value}"
+                     Margin="5,0,20,0"/>
+                    <Button Content="取得"
+                    Command="{Binding OnClickGetReceiptCommand}"
+                                    FontSize="24"
+                    Width="75"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- 患者番号・領収書番号・金額表示 -->
+            <StackPanel Grid.Row="1"
+                    Orientation="Vertical"
+                    VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="カルテ番号: " FontSize="24" />
+                    <TextBlock Text="{Binding Cid.Value}"
+                               FontWeight="Bold"
+                               FontSize="24"
+                               Margin="5,0,20,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="患者名: " FontSize="24" />
+                    <TextBlock Text="{Binding Name.Value}"
+                           FontWeight="Bold" 
+                                       FontSize="24"
+                           Margin="5,0,20,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="領収書番号: " FontSize="24" />
+                    <TextBlock Text="{Binding ReceiptNo.Value}"
+                           FontWeight="Bold" 
+                                       FontSize="24"
+                           Margin="5,0,20,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="請求金額: "  FontSize="24"/>
+                    <TextBlock Text="{Binding TotalYen.Value, StringFormat={}{0:N0}円}"
+                            FontWeight="Bold" 
+                                       FontSize="24"
+                            Margin="5,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="診療日: "  FontSize="24"/>
+                    <TextBlock Text="{Binding DateOfIssue.Value}"
+                            FontWeight="Bold" 
+                                       FontSize="24"
+                            Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            <Button Grid.Row="3"
+                            Content="削除"
+                            Command="{Binding OnClickDeleteReceiptCommand}"
+                            Width="120"
+                            FontSize="28"
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Right"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

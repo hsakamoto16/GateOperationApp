@@ -1,0 +1,9 @@
+﻿<Application x:Class="GateOperationApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GateOperationApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <local:GateSettings x:Key="GateSettings" />
+    </Application.Resources>
+</Application>

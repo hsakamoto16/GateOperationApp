@@ -1,0 +1,65 @@
+﻿<Window x:Class="GateOperationApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GateOperationApp"
+        xmlns:con="clr-namespace:GateOperationApp.Controls"
+        mc:Ignorable="d"
+        Title="Gate管理アプリ" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- 共有設定 -->
+            <RowDefinition Height="*"/>
+            <!-- 操作用タブ -->
+        </Grid.RowDefinitions>
+
+        <!-- 1. 共有設定パネル（URL と Token） -->
+        <StackPanel>
+            <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Margin="10"
+                    Background="#F0F0F0"
+                    VerticalAlignment="Center"
+                    >
+                <!-- URL -->
+                <Label Content="Gate URL:" VerticalAlignment="Center"/>
+                <TextBox Width="300"
+                     Text="{Binding GateUrl.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="{Binding IsEditable.Value}"
+                     ToolTip="接続先の URL を入力します"/>
+
+                <!-- Token -->
+                <Label Content="アクセスキー:" VerticalAlignment="Center"/>
+                <!-- セキュリティのため PasswordBox を使用 -->
+                <TextBox Width="300"
+                         Text="{Binding GateToken.Value, Mode=TwoWay}"
+                         IsEnabled="{Binding IsEditable.Value}"
+                         ToolTip="API トークンを入力します"/>
+
+                <!-- 適用ボタン -->
+                <!--
+            <Button Content="適用"
+                    Padding="8,4"
+                    Command="{Binding ApplySettingsCommand}"/>-->
+            </StackPanel>
+            <StackPanel>
+            <TextBlock
+                Text="※ Gate URL とアクセスキーはGateを開いて確認してください。 例: URL 「https://*.plum-gate.com」 アクセスキー 「abcd1234efgh5678」"
+                Margin="10,0,0,10"
+                Foreground="Gray"
+                FontStyle="Italic"/>
+                
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- 2. タブ切り替えパネル -->
+        <TabControl Grid.Row="1" Margin="10">
+            <TabItem Header="領収書データの削除">
+                <con:GateReceiptControl />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
